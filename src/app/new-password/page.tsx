@@ -12,14 +12,10 @@ export default function NewPassword() {
   });
 
   const validatePassword = (value: string) => {
-    const hasUppercase = /[A-Z]/.test(value);
-    const hasNumber = /[0-9]/.test(value);
-    const hasLength = value.length >= 8;
-
     setErrors({
-      uppercase: !hasUppercase,
-      number: !hasNumber,
-      length: !hasLength,
+      uppercase: !/[A-Z]/.test(value),
+      number: !/[0-9]/.test(value),
+      length: value.length < 8,
     });
   };
 
@@ -31,9 +27,7 @@ export default function NewPassword() {
 
   const handleConfirmPasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(e.target.value);
-  };
+  ) => setConfirmPassword(e.target.value);
 
   const isFormValid =
     password === confirmPassword &&

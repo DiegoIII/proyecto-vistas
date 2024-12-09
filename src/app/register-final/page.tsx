@@ -9,40 +9,29 @@ const SignupPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full p-8 bg-white shadow-md rounded-lg">
-        {/* Progreso con palomita */}
         <div className="flex justify-between mb-6">
-          {/* Paso 1 completado */}
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
+          <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
           </div>
-
           <div className="flex-grow border-t border-gray-300 mx-4"></div>
-
-          {/* Paso 2 */}
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-green-300 text-black rounded-full flex items-center justify-center">
-              2
-            </div>
+          <div className="w-8 h-8 bg-green-300 text-black rounded-full flex items-center justify-center">
+            2
           </div>
         </div>
 
-        {/* Formulario */}
         <form className="space-y-6">
-          {/* Nombre de usuario */}
           <div>
             <label
               htmlFor="username"
@@ -61,7 +50,6 @@ const SignupPage = () => {
             />
           </div>
 
-          {/* Contraseña */}
           <div className="relative">
             <label
               htmlFor="password"
@@ -88,7 +76,6 @@ const SignupPage = () => {
             <p className="mt-2 text-sm text-gray-500">Mínimo 8 caracteres</p>
           </div>
 
-          {/* Confirmar contraseña */}
           <div className="relative">
             <label
               htmlFor="confirm-password"
@@ -113,7 +100,6 @@ const SignupPage = () => {
             </button>
           </div>
 
-          {/* Términos y condiciones */}
           <div className="flex items-center">
             <input
               id="terms"
@@ -135,7 +121,6 @@ const SignupPage = () => {
             </label>
           </div>
 
-          {/* Botón de enviar */}
           <div>
             <button
               type="submit"
