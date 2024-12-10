@@ -2,20 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Cambiado a next/navigation
+import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
   const [code, setCode] = useState<string[]>(Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [timeLeft, setTimeLeft] = useState(119); // 2 minutos en segundos
-  const router = useRouter(); // Inicializamos el router para redirecciones
+  const [timeLeft, setTimeLeft] = useState(119);
+  const router = useRouter();
 
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
+        setTimeLeft((prev) => prev - 1);
       }, 1000);
-
       return () => clearInterval(timer);
     }
   }, [timeLeft]);
@@ -27,12 +26,11 @@ export default function ForgotPassword() {
   };
 
   const handleChange = (value: string, index: number) => {
-    if (!/^[0-9]?$/.test(value)) return; // Asegura que solo se permiten dígitos
+    if (!/^[0-9]?$/.test(value)) return;
     const newCode = [...code];
     newCode[index] = value;
     setCode(newCode);
 
-    // Enfoca el siguiente input si hay un valor
     if (value && index < code.length - 1) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -40,30 +38,34 @@ export default function ForgotPassword() {
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     if (e.key === "Backspace" && !code[index] && index > 0) {
-      // Mueve el foco al input anterior en caso de Backspace
       inputRefs.current[index - 1]?.focus();
     } else if (
       e.key === "Enter" &&
       index === code.length - 1 &&
       code.every((digit) => digit !== "")
     ) {
-      // Si está en el último campo y todos los campos están llenos, redirige
-      router.push("/new-password"); // Aquí defines la ruta a la nueva página
+      router.push("/new-password");
     }
   };
 
   const handleResendCode = () => {
-    // Resetea el tiempo a 2 minutos (120 segundos) cuando se hace clic en reenviar
     setTimeLeft(119);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-bl from-gray-100 to-gray-200">
       <div className="max-w-xl w-full bg-white p-12 shadow-xl rounded-lg">
-        <h2 className="text-4xl font-bold mb-6 text-center">
+        <div className="flex flex-col items-center mb-8">
+          <h1 className="text-3xl font-extrabold text-gray-800">Pixelia</h1>
+          <span className="text-sm text-gray-600 italic">
+            Tu tienda de juegos
+          </span>
+        </div>
+
+        <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">
           Recuperar tu cuenta
         </h2>
-        <p className="text-xl text-center mb-10">
+        <p className="text-xl text-center mb-10 text-gray-700">
           Te hemos enviado un código de 6 dígitos. Introdúcelo aquí para
           recuperar tu cuenta.
         </p>
@@ -73,10 +75,6 @@ export default function ForgotPassword() {
             <input
               key={index}
               ref={(el) => {
-                // Inicializa el array en el índice correcto si no existe
-                if (!inputRefs.current[index]) {
-                  inputRefs.current[index] = null;
-                }
                 inputRefs.current[index] = el;
               }}
               type="text"
@@ -99,7 +97,7 @@ export default function ForgotPassword() {
           <Link
             href="#"
             onClick={handleResendCode}
-            className="text-blue-500 hover:underline"
+            className="text-blue-500 hover:underline transition"
           >
             ¿No te llegó un código? Haz clic aquí para reenviar
           </Link>
